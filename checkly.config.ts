@@ -7,6 +7,8 @@ export default defineConfig({
     repoUrl: 'https://github.com/suzukieng/strich-web-demo-test',
     checks: {
         playwrightConfigPath: './playwright.config.ts',
+        // include test-videos to test barcode scanning from camera
+        include: '**/test-videos/*'
     },
     cli: {
         runLocation: 'eu-west-1',
