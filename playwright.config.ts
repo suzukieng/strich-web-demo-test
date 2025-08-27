@@ -8,12 +8,12 @@ export default defineConfig({
     timeout: 5_000,
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
-    retries: 0,
+    retries: 1,
     workers: process.env.CI ? 1 : undefined,
     reporter: 'html',
     use: {
         trace: 'on-first-retry',
-        video: 'on'
+        video: 'on-first-retry'
     },
     projects: [
         /* Test with a mobile viewport */

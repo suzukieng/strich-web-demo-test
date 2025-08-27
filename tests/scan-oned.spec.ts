@@ -8,7 +8,12 @@ test('Scans EAN/UPC Book Barcode', async () => {
       "--use-file-for-fake-video-capture=./test-videos/book_barcode.mjpeg",
     ]
   });
-  const context = await browser.newContext();
+  const context = await browser.newContext({
+    permissions: ['camera'],
+    recordVideo: {
+      dir: 'videos/'
+    }
+  });
   const page = await context.newPage();
 
   // check start page is displayed
