@@ -1,16 +1,30 @@
-import {defineConfig} from 'checkly'
+import { defineConfig } from 'checkly'
+import { Frequency } from 'checkly/constructs';
 
-export default defineConfig({
-    projectName: 'strich-web-demo-test',
-    logicalId: 'strich-web-demo-test',
-    repoUrl: 'https://github.com/suzukieng/strich-web-demo-test',
-    checks: {
-        playwrightConfigPath: './playwright.config.ts',
-        // include test-videos to test barcode scanning from camera
-        include: '**/test-videos/*'
-    },
-    cli: {
-        runLocation: 'eu-west-1',
-        retries: 0
-    }
+const config = defineConfig({
+  logicalId: 'strich-web-demo-test',
+  projectName: 'strich-web-demo-test',
+  checks: {
+    playwrightConfigPath: './playwright.config.ts',
+    playwrightChecks: [
+      {
+        logicalId: 'strich-web-demo-test',
+        name: 'Basic Scanning Test',
+        testCommand: 'npx playwright test ',
+        locations: [
+          'eu-central-1',
+        ],
+        frequency: Frequency.EVERY_24H, // a custom per-check frequency
+      },
+    ],
+    frequency: Frequency.EVERY_24H, // a global default frequency
+    locations: [
+      'eu-central-1', // a global default location
+    ],
+  },
+  cli: {
+    runLocation: 'eu-central-1', // where test and pw-test will run
+  },
 })
+
+export default config
