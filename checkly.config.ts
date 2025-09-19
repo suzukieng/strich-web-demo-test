@@ -13,6 +13,8 @@ const config = defineConfig({
                 testCommand: 'npx playwright test ',
                 locations: [
                     'eu-central-1',
+                    'us-east-1',
+                    'ap-southeast-1',
                 ],
                 frequency: Frequency.EVERY_24H, // a custom per-check frequency
             },
